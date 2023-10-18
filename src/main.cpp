@@ -1,18 +1,14 @@
-#include <Arduino.h>
+#include "main.h"
 
-// put function declarations here:
-int myFunction(int, int);
+#include <SD.h>
+
+AsyncWebServer server(80);
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  SD.begin(5, SPI, 40000000, "/", 5, false);
+  serveLargeStatic(server, "/static/", SD, "/www/static/", "max-age=86.400");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
 }
